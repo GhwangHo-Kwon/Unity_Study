@@ -196,6 +196,8 @@
 
     public class MainView : MonoBehaviour
     {
+        DisposableBag disposable;
+        
         private MainViewModel _viewModel;
 
         void Start()
@@ -204,7 +206,7 @@
             _viewModel = new MainViewModel(model);
 
             // ViewModel의 Position 변경 시 View 업데이트
-            _viewModel.Position.Subscribe(pos => transform.position = pos).AddTo(this);
+            _viewModel.Position.Subscribe(pos => transform.position = pos).AddTo(ref disposable);
         }
 
         void Update()
